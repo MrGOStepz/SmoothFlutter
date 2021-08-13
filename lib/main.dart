@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:global_configuration/global_configuration.dart';
+import 'package:smooth/config/app_setting.dart';
 
-void main() {
-  runApp(const MyApp());
+final Map<String, String> configuration = {};
+
+void main() async{
+  GlobalConfiguration().loadFromMap(Configuration().get());
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
