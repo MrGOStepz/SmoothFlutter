@@ -1,29 +1,100 @@
 import 'package:smooth/model/person/staff_model.dart';
 import 'package:smooth/services/db/dao/db.dart';
+import 'package:smooth/services/db/sql/staff_sql.dart';
 import 'crud_repository.dart';
 
-class StaffDAO implements CRUDRepository{
+class StaffDAO implements CRUDRepository {
   @override
   Future<bool?> add(param) async {
-    var result = await Database.conn.query('insert into users (name, email, age) values (?, ?, ?)', ['Bob', 'bob@bob.com', 25]);
-    return result.isNotEmpty;
+    Staff staff = param as Staff;
+    var isSuccess = false;
+    try {
+      var conn = await Database().getConn();
+      var results = await conn.query(StaffSQL.sqlAddStaff, [
+        staff.firstName,
+        staff.lastName,
+        staff.phoneNumber,
+        staff.email,
+        staff.staffPosition.id,
+        staff.clockStatus.id,
+        staff.password,
+        staff.isActive
+      ]);
+      conn.close();
+      isSuccess = results.isNotEmpty;
+      return isSuccess;
+    } catch (e) {
+      print(e);
+    }
+    return isSuccess;
   }
 
   @override
-  Future<bool?>  delete(param) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<bool?> delete(param) async {
+    Staff staff = param as Staff;
+    var isSuccess = false;
+    try {
+      var conn = await Database().getConn();
+      var results = await conn.query(StaffSQL.sqlDeleteStaff, [staff.id]);
+      conn.close();
+      isSuccess = results.isNotEmpty;
+      return isSuccess;
+    } catch (e) {
+      print(e);
+    }
+    return isSuccess;
   }
 
   @override
-  Future<bool?>  update(param) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<bool?> update(param) async {
+    Staff staff = param as Staff;
+    var isSuccess = false;
+    try {
+      var conn = await Database().getConn();
+      var results = await conn.query(StaffSQL.sqlUpdateStaff, [
+        staff.firstName,
+        staff.lastName,
+        staff.phoneNumber,
+        staff.email,
+        staff.staffPosition.id,
+        staff.clockStatus.id,
+        staff.password,
+        staff.isActive,
+        staff.id
+      ]);
+      conn.close();
+      print(results);
+      isSuccess = results.isNotEmpty;
+      return isSuccess;
+    } catch (e) {
+      print(e);
+    }
+    return isSuccess;
   }
 
   @override
-  Future getAll(param) async {
-    Staff result = (await Database.conn.query("")) as Staff;
-    return result;
+  Future<List<Staff>> getAll() async {
+    var staffList = <Staff>[];
+    try {
+      var conn = await Database().getConn();
+      var results = await conn.query(StaffSQL.sqlGetAllStaff);
+      var staff = Staff();
+      for (var row in results) {
+        staff.id = row[0];
+        staff.firstName = row[1];
+        staff.lastName = row[2];
+        staff.phoneNumber = row[3];
+        staff.email = row[4];
+        staff.staffPosition.id = row[5];
+        staff.clockStatus.id = row[6];
+        staff.password = row[7].toString();
+        staff.isActive = row[8];
+        staffList.add(staff);
+      }
+      conn.close();
+    } catch (e) {
+      print(e);
+    }
+    return staffList;
   }
 }

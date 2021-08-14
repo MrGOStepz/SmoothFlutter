@@ -1,5 +1,5 @@
 final Map<String, String> databaseSetting = {
-  "dataBaseName": "smooth",
+  "databaseName": "smoothdb",
   "userName": "root",
   "password": "G4856162651o",
   "host": "localhost",

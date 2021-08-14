@@ -9,4 +9,9 @@ abstract  class Person {
   int isActive = 1;
 
   Person(this.id, this.firstName, this.lastName, this.phoneNumber, this.email);
+
+  @override
+  String toString() {
+    return 'Person{id: $id, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, email: $email, dob: $dob, lastActive: $lastActive, isActive: $isActive}';
+  }
 }
