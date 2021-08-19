@@ -1,29 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:mysql1/mysql1.dart';
 import 'package:smooth/config/app_setting.dart';
 import 'package:smooth/services/db/dao/staff_dao.dart';
-
-import 'model/person/staff_model.dart';
-import 'services/db/dao/db.dart';
-import 'dart:async';
+import 'package:smooth/models/people/staff_model.dart';
+import 'package:smooth/services/db/db.dart';
 
 final Map<String, String> configuration = {};
 
-void main() async{
+void main() async {
   GlobalConfiguration().loadFromMap(Configuration().get());
-  // Database database = Database();
-  // var database = Database();
-  // database.getConn().then((conn) {
-  //   String sql  = 'select * from staff;';
-  //   conn.query(sql).then((result) {
-  //   for(var row in result){
-  //     print(row);
-  //   }
-  //   });
-  // conn.close();
-  // });
-
   runApp(MyApp());
 }
 
@@ -54,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var db = new Database();
   var mail = '';
 
-  void _getCustomer()  {
+  void _getCustomer() {
     var staffDAO = StaffDAO();
     var staff = Staff();
     staff.firstName = "TEST";
@@ -69,10 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         // var temp2 = staffDAO.add(staff);
         mail = value.toString();
-
       });
     });
-
 
     // db.getConn().then((conn) {
     //   String sql = 'select first_name from smoothdb.staff;';
@@ -114,7 +97,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
 
 ///////////////////////////////////////////////////////////////////
 // class MyApp extends StatelessWidget {

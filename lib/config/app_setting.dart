@@ -7,5 +7,4 @@ class Configuration {
   Configuration() {
     appSetting.addAll(databaseSetting);
   }
-
 }
