@@ -1,19 +1,16 @@
 import 'package:smooth/models/types/payment_type_model.dart';
+import 'package:smooth/services/db/crud_repository.dart';
 import 'package:smooth/services/db/db.dart';
 import 'package:smooth/services/db/sql/payment_type_sql.dart';
-import 'package:smooth/services/db/crud_repository.dart';
 
 class PaymentTypeDAO implements CRUDRepository {
   @override
   Future<bool?> add(param) async {
-    PaymentType paymentType = param as PaymentType;
+    var paymentType = param as PaymentType;
     var isSuccess = false;
     try {
       var conn = await Database().getConn();
-      await conn.query(PaymentTypeSQL.sqlAddPaymentType, [
-        paymentType.id,
-        paymentType.name
-      ]);
+      await conn.query(PaymentTypeSQL.sqlAddPaymentType, [paymentType.name]);
       conn.close();
       isSuccess = true;
     } catch (e) {
@@ -25,7 +22,7 @@ class PaymentTypeDAO implements CRUDRepository {
 
   @override
   Future<bool?> delete(param) async {
-    PaymentType paymentType = param as PaymentType;
+    var paymentType = param as PaymentType;
     var isSuccess = false;
     try {
       var conn = await Database().getConn();
@@ -59,7 +56,7 @@ class PaymentTypeDAO implements CRUDRepository {
 
   @override
   Future<bool?> update(param) async {
-    PaymentType paymentType = param as PaymentType;
+    var paymentType = param as PaymentType;
     var isSuccess = false;
     try {
       var conn = await Database().getConn();
@@ -71,5 +68,4 @@ class PaymentTypeDAO implements CRUDRepository {
     }
     return isSuccess;
   }
-
 }

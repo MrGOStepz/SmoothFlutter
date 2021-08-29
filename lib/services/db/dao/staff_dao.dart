@@ -32,7 +32,7 @@ class StaffDAO implements CRUDRepository {
 
   @override
   Future<bool?> add(param) async {
-    Staff staff = param as Staff;
+    var staff = param as Staff;
     var isSuccess = false;
     try {
       var conn = await Database().getConn();
@@ -47,7 +47,7 @@ class StaffDAO implements CRUDRepository {
 
   @override
   Future<bool?> delete(param) async {
-    Staff staff = param as Staff;
+    var staff = param as Staff;
     var isSuccess = false;
     try {
       var conn = await Database().getConn();
@@ -62,7 +62,7 @@ class StaffDAO implements CRUDRepository {
 
   @override
   Future<bool?> update(param) async {
-    Staff staff = param as Staff;
+    var staff = param as Staff;
     var isSuccess = false;
     try {
       var conn = await Database().getConn();
