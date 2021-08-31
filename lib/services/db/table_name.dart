@@ -6,6 +6,7 @@ class TableDB {
   static const String tableFoodType = "FOOD_TYPE";
   static const String tableIngredient = "INGREDIENT";
   static const String tableLocationMenu = "LOCATION_MENU";
+  static const String tableLocationMode = "LOCATION_MODE";
   static const String tableLocationTab = "LOCATION_TAB";
   static const String tableOrder = "ORDER";
   static const String tableOrderDetail = "ORDER_DETAIL";

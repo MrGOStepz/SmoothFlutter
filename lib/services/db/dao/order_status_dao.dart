@@ -1,35 +1,35 @@
 import 'package:smooth/models/statuses/status_model.dart';
 import 'package:smooth/services/db/crud_repository.dart';
 import 'package:smooth/services/db/db.dart';
-import 'package:smooth/services/db/sql/clock_status_sql.dart';
+import 'package:smooth/services/db/sql/order_status_sql.dart';
 
-class ClockStatusDAO implements CRUDRepository {
+class OrderStatusDAO implements CRUDRepository {
   @override
-  Future<List<ClockStatus>> getAll() async {
-    var clockStatusList = <ClockStatus>[];
+  Future<List<OrderStatus>> getAll() async {
+    var orderStatusList = <OrderStatus>[];
     try {
       var conn = await Database().getConn();
-      var results = await conn.query(ClockStatusSQL.sqlGetAllClockStatus);
-      var clockStatus = ClockStatus();
+      var results = await conn.query(OrderStatusSQL.sqlGetAllOrderStatus);
+      var orderStatus = OrderStatus();
       for (var row in results) {
-        clockStatus.id = row[0];
-        clockStatus.name = row[1];
-        clockStatusList.add(clockStatus);
+        orderStatus.id = row[0];
+        orderStatus.name = row[1];
+        orderStatusList.add(orderStatus);
       }
       conn.close();
     } catch (e) {
       print(e);
     }
-    return clockStatusList;
+    return orderStatusList;
   }
 
   @override
   Future<bool?> add(param) async {
-    var clockStatus = param as ClockStatus;
+    var orderStatus = param as OrderStatus;
     var isSuccess = false;
     try {
       var conn = await Database().getConn();
-      await conn.query(ClockStatusSQL.sqlAddClockStatus, [clockStatus.name]);
+      await conn.query(OrderStatusSQL.sqlAddOrderStatus, [orderStatus.name]);
       conn.close();
       isSuccess = true;
     } catch (e) {
@@ -40,11 +40,11 @@ class ClockStatusDAO implements CRUDRepository {
 
   @override
   Future<bool?> delete(param) async {
-    var clockStatus = param as ClockStatus;
+    var orderStatus = param as OrderStatus;
     var isSuccess = false;
     try {
       var conn = await Database().getConn();
-      await conn.query(ClockStatusSQL.sqlDeleteClockStatus, [clockStatus.id]);
+      await conn.query(OrderStatusSQL.sqlDeleteOrderStatus, [orderStatus.id]);
       conn.close();
       isSuccess = true;
     } catch (e) {
@@ -55,11 +55,11 @@ class ClockStatusDAO implements CRUDRepository {
 
   @override
   Future<bool?> update(param) async {
-    var clockStatus = param as ClockStatus;
+    var orderStatus = param as OrderStatus;
     var isSuccess = false;
     try {
       var conn = await Database().getConn();
-      await conn.query(ClockStatusSQL.sqlUpdateClockStatus, [clockStatus.id]);
+      await conn.query(OrderStatusSQL.sqlUpdateOrderStatus, [orderStatus.id]);
       conn.close();
       isSuccess = true;
     } catch (e) {

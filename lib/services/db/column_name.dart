@@ -80,4 +80,7 @@ class ColumnDB {
   static const String colLocationTabId = "LOCATION_TAP_ID";
   static const String colLocationTabName = "LOCATION_NAME";
   static const String colLocationOrder = "LOCATION_ORDER";
+  static const String colLocationModeId = "LOCATION_MODE_ID";
+  static const String colLocationModeName = "LOCATION_MODE_NAME";
+  static const String colLocationModeOrder = "LOCATION_MODE_ORDER";
 }
